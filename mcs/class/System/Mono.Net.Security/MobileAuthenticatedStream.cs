@@ -1102,29 +1102,41 @@ namespace Mono.Net.Security
 			}
 		}
 
-#region Need to Implement
 		public int CipherStrength {
 			get {
-				throw new NotImplementedException ();
+				CheckThrow (true);
+				var info = GetConnectionInfo ();
+				if (info == null)
+					return 0;
+				return new SslConnectionInfo (info).DataKeySize;
 			}
 		}
+
 		public int HashStrength {
 			get {
-				throw new NotImplementedException ();
+				CheckThrow (true);
+				var info = GetConnectionInfo ();
+				if (info == null)
+					return 0;
+				return new SslConnectionInfo (info).DataHashKeySize;
 			}
 		}
+
 		public int KeyExchangeStrength {
 			get {
-				throw new NotImplementedException ();
+				CheckThrow (true);
+				var info = GetConnectionInfo ();
+				if (info == null)
+					return 0;
+				return new SslConnectionInfo (info).KeyExchKeySize;
 			}
 		}
+
 		public bool CheckCertRevocationStatus {
 			get {
 				throw new NotImplementedException ();
 			}
 		}
-
-#endregion
 	}
 }
 #endif
